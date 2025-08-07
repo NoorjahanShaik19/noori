@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Group Discussion Helper</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 600px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      margin: 20px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #007bff;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .gd-content {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #f0f8ff;
+      border-left: 4px solid #007bff;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Group Discussion Content Generator</h1>
+    <input type="text" id="topicInput" placeholder="Enter your GD topic...">
+    <button onclick="generateGD()">Get GD Content</button>
+    <div id="gdOutput" class="gd-content" style="display:none;"></div>
+  </div>
+
+  <script>
+    function generateGD() {
+      const topic = document.getElementById('topicInput').value.trim();
+      const output = document.getElementById('gdOutput');
+
+      if (topic === '') {
+        output.style.display = 'block';
+        output.innerHTML = '❗ Please enter a topic.';
+        return;
+      }
+
+      // Predefined example responses (you can expand this)
+      const gdPoints = {
+        "Artificial Intelligence": [
+          "AI is revolutionizing industries by automating repetitive tasks.",
+          "Concerns include job displacement and ethical decision-making.",
+          "AI can enhance healthcare, education, and cybersecurity.",
+          "Governments need to regulate AI to prevent misuse."
+        ],
+        "Climate Change": [
+          "Global temperatures are rising due to greenhouse gas emissions.",
+          "Countries must invest in renewable energy sources.",
+          "Public awareness and individual responsibility are critical.",
+          "Climate agreements like the Paris Accord are essential."
+        ],
+        "Online Education": [
+          "Online learning has become essential after the COVID-19 pandemic.",
+          "It offers flexibility but lacks real-time engagement.",
+          "Digital divide and access to technology is a major challenge.",
+          "Hybrid models may combine the best of both worlds."
+        ]
+      };
+
+      let points = gdPoints[topic] || [
+        `Here are some general points you can discuss for "${topic}":`,
+        `- Start with a brief definition or background of the topic.`,
+        `- Present both advantages and disadvantages.`,
+        `- Include examples, statistics, or current events.`,
+        `- End with your opinion or a solution-oriented conclusion.`
+      ];
+
+      output.innerHTML = `<strong>GD Points for "${topic}":</strong><ul>` + 
+        points.map(p => `<li>${p}</li>`).join('') + '</ul>';
+      output.style.display = 'block';
+    }
+  </script>
+</body>
+</html>
